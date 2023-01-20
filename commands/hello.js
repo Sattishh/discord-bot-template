@@ -1,9 +1,9 @@
 module.exports.run = async (bot, message, args) => {
-    
+    message.channel.send("Hello!")
 }
 
 module.exports.config = {
-    name: "",
+    name: "hello",
     description: "",
     usage: "",
     accessableby: "",
