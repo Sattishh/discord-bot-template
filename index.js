@@ -1,9 +1,16 @@
-const Discord = require('discord.js');
-const bot = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"]});
+const { Client, GatewayIntentBits, Collection } = require('discord.js');
+const bot = new Client({
+    intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
+	],
+});
 const fs = require('fs');
 
-bot.commands = new Discord.Collection();
-bot.aliases = new Discord.Collection();
+bot.commands = new Collection();
+bot.aliases = new Collection();
 
 fs.readdir("./commands/", (err, files) => {
 
@@ -39,4 +46,4 @@ bot.on("message", async message => {
         if(commandfile) commandfile.run(bot,message,args)
 });
 
-bot.login()
+bot.login(process.env.token)
